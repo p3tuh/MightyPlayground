@@ -1,5 +1,7 @@
 var Auth = require('../../db/models/user.js');
 var Q = require('q');
+var passport = require('./facebookSignin.js');
+
 module.exports = {
 
   find: function(req, res) {
@@ -50,5 +52,15 @@ module.exports = {
         res.status(200).send('User deleted!');  //redirect to facebook login screen
       }
     });
+  },
+
+  authenticate: function() {
+
   }
+  
 };
+
+
+
+
+
