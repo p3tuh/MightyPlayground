@@ -12,7 +12,7 @@ angular.module('starter.messageController', [])
     console.log('sending data! ' + data.message);
     return $http({
       method: 'POST',
-      url: '/api/messages',
+      url: '/messages',
       data: JSON.stringify(data)
     })
     .then(function(resp) {

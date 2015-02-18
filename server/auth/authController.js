@@ -55,7 +55,16 @@ module.exports = {
   },
 
   authenticate: function() {
+    passport.authenticate('facebook'), 
+      function(req,res) {
+      };
+    console.log('facebook');
+  },
 
+  loginUser: function(){ 
+    console.log('loginUser');
+    passport.authenticate('facebook', { successRedirect: '/messages',
+                                          failureRedirect: '/login' });
   }
   
 };

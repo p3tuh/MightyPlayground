@@ -100,7 +100,7 @@ angular.module('starter.services', [])
   var getMessages = function() {
     return $http({
       method: 'GET',
-      url: '/api/messages/'
+      url: '/messages/'
     })
     .then(function (resp) {
       return resp.data;
