@@ -160,6 +160,11 @@ angular.module('thoughtdrop.services', [])
       return q.promise;
     }
   }
+
+  return {
+    getPicture: getPicture
+  }
+  
 }]);
 
 

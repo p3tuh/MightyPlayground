@@ -1,8 +1,5 @@
-<<<<<<< HEAD
-angular.module('thoughtdrop', ['ionic', 'thoughtdrop.controllers', 'thoughtdrop.services', 'thoughtdrop.messageController', 'ngCordova.plugins.geolocation', 'ngCordovaOauth', 'ngStorage', 'thoughtdrop.camera', 'thoughtdrop.contacts'])
-=======
 angular.module('thoughtdrop', ['ionic', 'thoughtdrop.controllers', 'thoughtdrop.services', 'thoughtdrop.messageController', 'ngCordova.plugins.geolocation', 'ngCordovaOauth', 'ngStorage', 'thoughtdrop.camera'])
->>>>>>> (feat) Start camera feat
+
 
 .run(function($ionicPlatform, $window, $localStorage, $state, $location) {
   $ionicPlatform.ready(function() {
@@ -23,7 +20,7 @@ angular.module('thoughtdrop', ['ionic', 'thoughtdrop.controllers', 'thoughtdrop.
     $state.go('tab.messages');
   }
 
-})
+}) 
 
 .config(function($stateProvider, $urlRouterProvider, $ionicConfigProvider) {
   $ionicConfigProvider.tabs.position('bottom');
@@ -91,6 +88,14 @@ angular.module('thoughtdrop', ['ionic', 'thoughtdrop.controllers', 'thoughtdrop.
     }
   });
 
+  $compileProvider.imgSrcSanitizationWhitelist(/^\s*(https?|ftp|mailto|file|tel):/);
+
+
   // if none of the above states are matched, use this as the fallback
   $urlRouterProvider.otherwise('/messages');
 });
+
+
+
+
+
