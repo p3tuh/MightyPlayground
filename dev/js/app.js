@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 angular.module('thoughtdrop', ['ionic', 'thoughtdrop.controllers', 'thoughtdrop.services', 'thoughtdrop.messageController', 'ngCordova.plugins.geolocation', 'ngCordovaOauth', 'ngStorage', 'thoughtdrop.camera', 'thoughtdrop.contacts'])
+=======
+angular.module('thoughtdrop', ['ionic', 'thoughtdrop.controllers', 'thoughtdrop.services', 'thoughtdrop.messageController', 'ngCordova.plugins.geolocation', 'ngCordovaOauth', 'ngStorage', 'thoughtdrop.camera'])
+>>>>>>> (feat) Start camera feat
 
 .run(function($ionicPlatform, $window, $localStorage, $state, $location) {
   $ionicPlatform.ready(function() {

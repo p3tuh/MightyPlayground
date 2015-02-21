@@ -8,6 +8,10 @@
         <label class="item">
           <button class="button button-block button-dark" type="submit">Submit!</button>
         </label>
+        <label class="item">
+          <button ng-click="getPhoto()" class="button button-block button-primary">Take Photo</button>
+          <img ng-src="{{lastPhoto}}" style="max-width: 100%">
+        </label>
       </form>
     </ion-content>
   </ion-view>
