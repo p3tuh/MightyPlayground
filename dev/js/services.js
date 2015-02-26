@@ -78,6 +78,31 @@ angular.module('thoughtdrop.services', [])
     sendData: sendData
   };
 
+  var findNearby = function() {
+    var sendPosition = function(data) {
+      return $http({
+        method: 'POST',
+        url: //base
+        '/api/messages/nearby',
+        data: JSON.stringify(data)
+      })
+      .then(function (resp) {
+        console.log('Server resp to func call to findNearby: ', resp);  
+        return resp.data;
+      });
+    };
+    
+    $cordovaGeolocation
+    .getCurrentPosition()
+    .then(function(position) {
+      var coordinates = {};
+      coordinates.lat = position.coords.latitude;
+      coordinates.long = position.coords.longitude;
+      sendPosition(coordinates);
+      console.log('Messages factory sending coordinates to server: ', coordinates);
+    });
+  };
+
 })
 
 .factory('MessageDetail', function(){
@@ -133,7 +158,7 @@ angular.module('thoughtdrop.services', [])
   };
 })
 
-.factory('Facebook', function($http){
+.factory('Facebook', function($http, $localStorage, $window){
 
   var dataStorage = {};
 
@@ -144,29 +169,38 @@ angular.module('thoughtdrop.services', [])
     console.log('FB factory keepInfo triggered: ', JSON.stringify(dataStorage.userData.data));
   };
 
-  var updatePhone = function(data) {
-    dataStorage.userData.phoneNumber = data.phoneNumber;
-    console.log('FB factory xdatePhone triggered : ', JSON.stringify(dataStorage.userData));
+  var keepInfo = function(userData) {
+    dataStorage.userData = userData;
+    console.log('Keeping INfo: ' + JSON.stringify(dataStorage.userData));
   };
 
   var storeUser = function(data) {
-    console.log('storeUser triggered: ', JSON.stringify(data));
-    dataStorage.userData.data.phoneNumber = data.phoneNumber; 
-    console.log('final data before sending to db: ', JSON.stringify(dataStorage.userData.data));
+    dataStorage.userData.phoneNumber = data.phoneNumber;  //add phone# to fb data
+
+    var userInfo = {
+      _id: data.phoneNumber,
+      name: dataStorage.userData.name,
+      fbID: dataStorage.userData.id,
+      picture: dataStorage.userData.picture
+    };
+
+    console.log('dataStorage before server: ' + JSON.stringify(userInfo));    
+
+    $localStorage.userInfo = userInfo;
+    console.log('WINDOW STORAGE: ' + JSON.stringify($localStorage.userInfo));
 
     return $http({
       method: 'POST',
-      url: //base
+      url: //base  
       '/api/auth/id',
-      data: JSON.stringify(dataStorage.userData.data)
+      data: JSON.stringify(userInfo) 
     })
     .then(function(resp) {
-      console.log('Server resp to func call to storeUser: ', resp);
+      console.log('Server resp to func call to storeUser: ', JSON.stringify(resp));
     });
   };
 
   return {
-    updatePhone: updatePhone,
     storeUser: storeUser,
     keepInfo: keepInfo
   };

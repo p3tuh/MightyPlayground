@@ -41,6 +41,11 @@ module.exports = {
       }
     };
     return query;
+    
+    findAround(query, function(err, result){
+      console.log('Sent messages within 100m of (' + req.body[0].long + ", " + req.body[0].lat + ') to client. Here are the messages:' + result);
+      res.sendStatus(result);
+    });
   },
 
   computeSortString: function(sortType) {
@@ -62,12 +67,13 @@ module.exports = {
       .limit(50) 
       .sort(sortString)
       .exec(function (err, messages) {
-        console.log('Sent messages within 100m of (' + req.body[0].lat + ", " + req.body[0].long + ') to client. Here are the messages:' + messages);
+        // console.log('Sent messages within 100m of (' + req.body[0].lat + ", " + req.body[0].long + ') to client. Here are the messages:' + messages);
         res.send(messages);
     });
   },
 
   saveMessage: function (req, res) {
+    // console.log('saveMesage! req.body: ' + JSON.stringify(req.body));
     var createMessage = Q.nbind(Message.create, Message);
     console.log(req.body);
     var data = { //TODO: add a facebookID field
@@ -90,6 +96,7 @@ module.exports = {
       });
   },
 
+<<<<<<< HEAD
   // saveImage: function(req, res) {}
     //TODO: figure out how to send photo from server
     
@@ -110,4 +117,38 @@ module.exports = {
     //       console.log('Upload Done');
     //     }
     //   });
+=======
+  displayReplies: function (req, res) {
+    //stuff
+  },
+
+  savePrivate: function(req, res) {
+    var createMessage = Q.nbind(Message.create, Message);
+    console.log('private message data: ' + JSON.stringify(req.body));
+
+    createMessage(req.body) 
+      .then(function (createdMessage) {
+        console.log('Message ' + data.message + ' was successfully saved to database', createdMessage);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  },
+
+  getPrivate: function(req, res) {
+    console.log('server req.body: ' + JSON.stringify(req.body));
+    var locationQuery = module.exports.queryByLocation(req.body.coordinates.lat, req.body.coordinates.long, 100);
+    // { location: { '$near': { '$geometry': [Object], '$maxDistance': 100 } } }
+    Message
+      .find(locationQuery)
+      .where(isPrivate).equals(true)
+      .where(req.body.upserPhone)
+      .in(recipients)
+      // .sort()
+      .exec(function(err, messages) {
+        res.send(messages);
+    });
+
+  }
+>>>>>>> 23747eb2e50dabdf9dfc9705e117c6be9125e073
 };
