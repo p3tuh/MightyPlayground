@@ -187,18 +187,18 @@ gulp.task('build', function(){
     'watchjs',
     'watchtemplates',
     'watchcss',
-    'watchindex',
-    ['inject1',
-    'inject2',
-    'inject3',
+    'watchindex'
+    // ['inject1',
+    // 'inject2',
+    // 'inject3',
     // 'inject4',
-    'inject5',
+    // 'inject5',
     // 'inject6',
-    'inject7',],
+    // 'inject7',],
     // 'ionic-build',
     // 'browser-sync'
     // 'serve',
-    'ionic'
+    // 'ionic'
     );
 });
 

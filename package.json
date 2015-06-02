@@ -65,5 +65,8 @@
     "org.apache.cordova.file-transfer",
     "https://github.com/cowbell/cordova-plugin-geofence",
     "org.apache.cordova.contacts"
+  ],
+  "cordovaPlatforms": [
+    "ios"
   ]
 }

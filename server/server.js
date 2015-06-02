@@ -4,7 +4,7 @@ var db = require('../db/config.js');
 
 var app = express();
 
-var port = process.env.PORT || 8000;
+var port = process.env.PORT || 8100;
 
 console.log(port);
 
